@@ -84,9 +84,14 @@ app.layout = html.Div([
     )
 ])
 
-server = app.server
+sapp = dash.Dash(__name__)
+server = app.server  # Required for Render to find the app
 
+# Define your layout, callbacks, etc.
+
+# Local testing only:
 if __name__ == "__main__":
+    # These are local tests — fine to leave here!
     test_values = [
         "$50M",
         "~$45M",
@@ -99,3 +104,5 @@ if __name__ == "__main__":
     for val in test_values:
         result = estimate_funding(val)
         print(f"Input: {val}, Estimated Funding: {result}")
+
+    app.run_server(debug=True)
