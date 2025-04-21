@@ -1,4 +1,5 @@
 
+
 import pandas as pd
 import plotly.express as px
 import dash
@@ -84,7 +85,7 @@ app.layout = html.Div([
     )
 ])
 
-sapp = dash.Dash(__name__)
+app = dash.Dash(__name__)
 server = app.server  # Required for Render to find the app
 
 # Define your layout, callbacks, etc.
