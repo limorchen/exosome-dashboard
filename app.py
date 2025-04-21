@@ -43,6 +43,9 @@ def estimate_funding(value):
         return np.nan
     match = re.search(r'\$?~?\$?([\d\.]+)[ -\u2013]?([\d\.]*)[Mm]?', value)
     if match:
+        # Check if the matched group contains only a decimal point
+        if match.group(1) == '.':  
+            return np.nan  # Or any other appropriate handling
         low = float(match.group(1))
         high = float(match.group(2)) if match.group(2) else low
         return (low + high) / 2
@@ -83,5 +86,16 @@ app.layout = html.Div([
 
 server = app.server
 
-if __name__ == '__main__':
-    app.run_server(debug=True)
+if __name__ == "__main__":
+    test_values = [
+        "$50M",
+        "~$45M",
+        "$40–60M",
+        "$30 - 50M",
+        "Not a number",
+        "$.M",
+        None
+    ]
+    for val in test_values:
+        result = estimate_funding(val)
+        print(f"Input: {val}, Estimated Funding: {result}")
