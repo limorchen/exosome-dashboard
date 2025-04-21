@@ -55,6 +55,8 @@ def estimate_funding(value):
 df['Funding Estimate ($M)'] = df['Est. Market Cap/funding'].apply(estimate_funding)
 
 app = dash.Dash(__name__)
+server = app.server  # Required for Render to find the app
+
 app.layout = html.Div([
     html.H1("Exosome Therapeutics Company Dashboard"),
     html.H3("Companies by Business Area"),
@@ -86,7 +88,7 @@ app.layout = html.Div([
 ])
 
 
-server = app.server  # Required for Render to find the app
+
 
 # Define your layout, callbacks, etc.
 
